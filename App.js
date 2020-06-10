@@ -8,10 +8,9 @@
 
 import React, { useState } from 'react';
 import { Animated, SafeAreaView, StatusBar } from 'react-native';
-import LoaderComponent from './src/LoaderComponent';
+import PlaceholderComponent from './src/PlaceholderComponent';
 import SearchComponent from './src/SearchComponent';
 console.disableYellowBox = true;
-
 
 const App = () => {
   const [scrollYValue, setScrollYValue] = useState(new Animated.Value(0));
@@ -48,11 +47,11 @@ const App = () => {
           }}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollYValue } } }],
-            // { useNativeDriver: true },
+            { useNativeDriver: true },
             () => { },          // Optional async listener
           )}
           contentInsetAdjustmentBehavior="automatic">
-          {array.map(item => <LoaderComponent />)}
+          {array.map(item => <PlaceholderComponent />)}
         </Animated.ScrollView>
       </SafeAreaView>
     </Animated.View>
