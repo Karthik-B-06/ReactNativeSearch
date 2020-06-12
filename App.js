@@ -6,14 +6,19 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
-import { Animated, SafeAreaView, StatusBar } from 'react-native';
-import PlaceholderComponent from './src/PlaceholderComponent';
+import React, { useState, useMemo } from 'react';
+import { Animated, SafeAreaView, StatusBar, View } from 'react-native';
+import NameListItem from './src/NameListItem';
 import SearchComponent from './src/SearchComponent';
+import { deviceHeight } from './src/LoaderComponent';
+import mockList from './src/helpers/mockList';
+import 'react-native-gesture-handler';
+
 console.disableYellowBox = true;
 
 const App = () => {
   const [scrollYValue, setScrollYValue] = useState(new Animated.Value(0));
+  const [searchedTerm, setSearchedTerm] = useState('');
   const clampedScroll = Animated.diffClamp(
     Animated.add(
       scrollYValue.interpolate({
@@ -26,18 +31,25 @@ const App = () => {
     0,
     50,
   )
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const usersList = useMemo(() => {
+    if (searchedTerm.length === 0) {
+      return mockList;
+    }
+    const list = mockList.filter((name) => {
+      return name.includes(searchedTerm)
+    });
+    return list;
+  }, [searchedTerm])
   return (
     <Animated.View>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <SearchComponent clampedScroll={clampedScroll} />
+        <SearchComponent searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} clampedScroll={clampedScroll} />
         <Animated.ScrollView
           showsVerticalScrollIndicator={false}
           style={{
-            margin: 20,
             backgroundColor: 'white',
-            paddingTop: 55
+            paddingTop: StatusBar.currentHeight + 50
           }}
           contentContainerStyle={{
             display: 'flex',
@@ -51,7 +63,8 @@ const App = () => {
             () => { },          // Optional async listener
           )}
           contentInsetAdjustmentBehavior="automatic">
-          {array.map(item => <PlaceholderComponent />)}
+          {usersList.map((name, index) => <NameListItem key={index} name={name} />)}
+          <View style={{ height: deviceHeight * 0.4 }}></View>
         </Animated.ScrollView>
       </SafeAreaView>
     </Animated.View>

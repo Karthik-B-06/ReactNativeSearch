@@ -3,6 +3,8 @@ import { Dimensions } from 'react-native';
 import { Circle, Rect } from "react-native-svg";
 import ContentLoader from 'rn-content-loader';
 export const deviceWidth = Dimensions.get('window').width;
+export const deviceHeight = Dimensions.get('window').height;
+
 
 const LoaderComponent = props => (
   <ContentLoader

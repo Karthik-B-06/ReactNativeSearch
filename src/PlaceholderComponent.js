@@ -6,7 +6,7 @@ const PlaceholderComponent = props => (
   <View
     style={{
       height: 200,
-      width: (deviceWidth - 70) / 2,
+      width: (deviceWidth - 60) / 2,
     }}
   >
     <View
@@ -14,7 +14,7 @@ const PlaceholderComponent = props => (
         borderRadius: 20,
         backgroundColor: '#f3f3f3',
         height: 180,
-        width: (deviceWidth - 70) / 2
+        width: (deviceWidth - 60) / 2
       }}
     ></View>
 
