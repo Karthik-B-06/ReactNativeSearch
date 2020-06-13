@@ -5,9 +5,13 @@
 [React Native Search Extended](https://medium.com/practicaldesign/react-native-search-extended-1765c93b58fb)
 
 
+Works good in iOS. 
+__________________
 
 Android WIP !
 
+
+# Screenshots
 
 | iOS                                          | Android                                      |
 |----------------------------------------------|----------------------------------------------|
