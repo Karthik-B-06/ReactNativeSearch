@@ -10,7 +10,8 @@ Read my blogs :
 Works good in iOS. 
 __________________
 
-Android WIP ! PRs are welcome ! 
+
+> Android WIP 💯 ! 
 
 
 # Screenshots
@@ -18,3 +19,7 @@ Android WIP ! PRs are welcome !
 | iOS                                          | Android                                      |
 |----------------------------------------------|----------------------------------------------|
 | ![](CollapsibleSearch.gif)                   |                                              |
+
+
+
+> PRs are welcome 🤟 ! 
