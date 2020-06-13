@@ -10,7 +10,7 @@ Read my blogs :
 Works good in iOS. 
 __________________
 
-Android WIP !
+Android WIP ! PRs are welcome ! 
 
 
 # Screenshots
