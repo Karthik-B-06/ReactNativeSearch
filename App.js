@@ -7,8 +7,8 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { Animated, SafeAreaView, StatusBar, View } from 'react-native';
-import NameListItem from './src/NameListItem';
+import { Animated, SafeAreaView, StatusBar, View, Platform, Text } from 'react-native';
+import NameListItem, { deviceWidth } from './src/NameListItem';
 import SearchComponent from './src/SearchComponent';
 import { deviceHeight } from './src/LoaderComponent';
 import mockList from './src/helpers/mockList';
@@ -41,32 +41,43 @@ const App = () => {
     return list;
   }, [searchedTerm])
   return (
-    <Animated.View>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <SearchComponent searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} clampedScroll={clampedScroll} />
+    <Animated.View style={{
+      backgroundColor: 'white',
+      flex: 1,
+    }}>
+      <StatusBar barStyle="dark-content" backgroundColor='white' translucent={true} />
+      <View style={{ height: Platform.OS === 'ios' ? StatusBar.currentHeight + 50 : 30 }}></View>
+      <View style={{ position: 'relative' }}>
+        {Platform.OS === 'ios' && (
+          <SearchComponent searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} clampedScroll={clampedScroll} />
+        )}
         <Animated.ScrollView
+          stickyHeaderIndices={Platform.OS === 'android' ? [0] : []}
           showsVerticalScrollIndicator={false}
           style={{
             backgroundColor: 'white',
-            paddingTop: StatusBar.currentHeight + 50
+            paddingTop: Platform.OS === 'ios' ? 70 : 0
           }}
           contentContainerStyle={{
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            backgroundColor: 'white',
           }}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollYValue } } }],
             { useNativeDriver: true },
             () => { },          // Optional async listener
+          )}>
+          {Platform.OS === 'android' && (
+            <SearchComponent searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} clampedScroll={clampedScroll} />
           )}
-          contentInsetAdjustmentBehavior="automatic">
+          {usersList.length === 0 && <Text style={{ textAlign: 'center', width: deviceWidth, fontSize: 18, paddingTop: 20 }}>No results for {searchedTerm}</Text>}
           {usersList.map((name, index) => <NameListItem key={index} name={name} />)}
-          <View style={{ height: deviceHeight * 0.4 }}></View>
+          <View style={{ height: deviceHeight * 0.5 }}></View>
         </Animated.ScrollView>
-      </SafeAreaView>
+      </View>
     </Animated.View>
   );
 };
