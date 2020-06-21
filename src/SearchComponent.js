@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Animated, ScrollView, StatusBar, StyleSheet, TextInput, View, Text, TouchableHighlight } from 'react-native';
+import React, { useMemo, useState, useEffect } from 'react';
+import { Animated, ScrollView, StatusBar, StyleSheet, TextInput, View, Text, TouchableHighlight, Platform } from 'react-native';
 import mockList from './helpers/mockList';
 import { deviceWidth } from './LoaderComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -19,7 +19,7 @@ const SearchComponent = (props) => {
     outputRange: [1, 0],
     extrapolate: 'clamp',
   });
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(props.searchedTerm);
   const temporarySearchResults = useMemo(() => {
     const list = mockList.filter((name) => {
       return name.includes(searchTerm)
@@ -89,14 +89,16 @@ const SearchComponent = (props) => {
       />
       {
         (textInputFocussed) && (
-          <ScrollView style={{
+          <ScrollView contentContainerStyle={{
+            backgroundColor: '#FFFFFF',
+          }} style={{
             position: 'absolute',
             backgroundColor: '#FFFFFF',
-            top: StatusBar.currentHeight + 50,
+            // top: StatusBar.currentHeight + 60,
             left: 0,
             zIndex: 9999,
             width: deviceWidth,
-            height: 600,
+            height: 800,
           }}>
             {searchTerm.length > 0 && renderSearchList()}
           </ScrollView>
@@ -108,15 +110,17 @@ const SearchComponent = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 40,
-    width: deviceWidth - 40,
-    left: 20,
+    height: 70,
+    width: deviceWidth,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 99,
-    backgroundColor: 'white'
+    position: Platform.OS === 'ios' ? 'absolute' : 'relative',
   },
   formField: {
     backgroundColor: '#F4F4F4',
+    width: deviceWidth - 40,
     padding: 12,
     paddingLeft: 20,
     paddingRight: 20,
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     height: 50
   },
   searchList: {
-    paddingLeft: 16
+    paddingLeft: 30
   },
   searchListItem: {
     paddingTop: 16,
