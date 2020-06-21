@@ -7,7 +7,7 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { Animated, SafeAreaView, StatusBar, View, Platform } from 'react-native';
+import { Animated, SafeAreaView, StatusBar, View, Platform, Text } from 'react-native';
 import NameListItem, { deviceWidth } from './src/NameListItem';
 import SearchComponent from './src/SearchComponent';
 import { deviceHeight } from './src/LoaderComponent';
@@ -73,7 +73,9 @@ const App = () => {
           {Platform.OS === 'android' && (
             <SearchComponent searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} clampedScroll={clampedScroll} />
           )}
+          {usersList.length === 0 && <Text style={{ textAlign: 'center', width: deviceWidth, fontSize: 18, paddingTop: 20 }}>No results for {searchedTerm}</Text>}
           {usersList.map((name, index) => <NameListItem key={index} name={name} />)}
+          <View style={{ height: deviceHeight * 0.5 }}></View>
         </Animated.ScrollView>
       </View>
     </Animated.View>

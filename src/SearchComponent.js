@@ -96,7 +96,7 @@ const SearchComponent = (props) => {
           <View style={{
             position: 'absolute',
             backgroundColor: '#FFFFFF',
-            top: StatusBar.currentHeight + 60,
+            top: StatusBar.currentHeight + 58,
             left: 0,
             zIndex: 9999,
             width: deviceWidth,
