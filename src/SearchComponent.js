@@ -49,7 +49,10 @@ const SearchComponent = (props) => {
           })
         }
         {
-          temporarySearchResults.length !== 0 && <TouchableOpacity onPress={() => props.setSearchedTerm(searchTerm)}>
+          temporarySearchResults.length !== 0 && <TouchableOpacity onPress={() => {
+            props.setSearchedTerm(searchTerm);
+            serachInputRef.blur();
+          }}>
             <View style={styles.searchListItem}>
               <Text style={[
                 styles.searchListItemText,
@@ -80,6 +83,7 @@ const SearchComponent = (props) => {
         defaultValue={props.searchedTerm}
         placeholder='Search'
         style={styles.formField}
+        ref={ref => serachInputRef = ref}
         placeholderTextColor={'#888888'}
         onFocus={() => setTextInputFocussed(true)}
         onBlur={handleBlur}
@@ -89,19 +93,17 @@ const SearchComponent = (props) => {
       />
       {
         (textInputFocussed) && (
-          <ScrollView contentContainerStyle={{
-            backgroundColor: '#FFFFFF',
-          }} style={{
+          <View style={{
             position: 'absolute',
             backgroundColor: '#FFFFFF',
-            // top: StatusBar.currentHeight + 60,
+            top: StatusBar.currentHeight + 60,
             left: 0,
             zIndex: 9999,
             width: deviceWidth,
             height: 800,
           }}>
             {searchTerm.length > 0 && renderSearchList()}
-          </ScrollView>
+          </View>
         )
       }
     </Animated.View>

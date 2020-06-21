@@ -46,7 +46,7 @@ const App = () => {
       flex: 1,
     }}>
       <StatusBar barStyle="dark-content" backgroundColor='white' translucent={true} />
-      <View style={{ height: Platform.OS === 'ios' ? StatusBar.currentHeight + 50 : 20 }}></View>
+      <View style={{ height: Platform.OS === 'ios' ? StatusBar.currentHeight + 50 : 30 }}></View>
       <View style={{ position: 'relative' }}>
         {Platform.OS === 'ios' && (
           <SearchComponent searchedTerm={searchedTerm} setSearchedTerm={setSearchedTerm} clampedScroll={clampedScroll} />
