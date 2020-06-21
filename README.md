@@ -7,18 +7,15 @@ Read my blogs :
 [React Native Search Extended](https://medium.com/practicaldesign/react-native-search-extended-1765c93b58fb)
 
 
-Works good in iOS. 
+Works good in both Android and iOS. But Android still has some issues because of positioning a <View> absolute. 
 __________________
-
-
-> Android WIP 💯 ! 
 
 
 # Screenshots
 
 | iOS                                          | Android                                      |
 |----------------------------------------------|----------------------------------------------|
-| ![](CollapsibleSearch.gif)                   |                    WIP                       |
+| ![](CollapsibleSearch.gif)                   | ![](SearchAndroid.gif)                   |
 
 
 
