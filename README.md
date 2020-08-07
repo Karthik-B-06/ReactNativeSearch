@@ -6,6 +6,8 @@ Read my blogs :
 
 [React Native Search Extended](https://medium.com/practicaldesign/react-native-search-extended-1765c93b58fb)
 
+Checkout my similar package [here](https://github.com/timelessco/react-native-search-component) 
+
 
 Works good in both Android and iOS. But Android still has some issues with absolute positioning. 
 __________________
